@@ -12,6 +12,7 @@ int main(){
         scanf("%d",&bt[i]);
     }
     wt[0]=0;
+    tat[0]=bt[0];
     for(i=1;i<n;i++){
         wt[i]=wt[i-1]+bt[i-1];
         tat[i]=wt[i]+bt[i];
