@@ -36,4 +36,5 @@ void main(){
     pthread_create(&t[i],NULL,philosopher,(void *)&num[i]);
   }
   for(i=0;i<5;i++) pthread_join(t[i],NULL);
+  for(i=0;i<5;i++) sem_destroy(&sem[i]);
 }
