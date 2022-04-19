@@ -1,13 +1,13 @@
 #include<stdio.h>
 #define n 20
 int main(){
-  int allocation[n][n],max[n][n],need[n][n],resources[n],available[n],possess[n],finish[n],sequence[n],index=0,np,nr,count;
+  int allocation[n][n],max[n][n],need[n][n],available[n],work[n],possess[n],finish[n],sequence[n],index=0,np,nr;
   printf("Enter number of process:");
   scanf("%d",&np);
   printf("Enter number of types of resources:");
   scanf("%d",&nr);
-  printf("Enter maximum resources available:");
-  for(int i=0;i<nr;i++) scanf("%d",&resources[i]);
+  printf("Enter maximum available resources:");
+  for(int i=0;i<nr;i++) scanf("%d",&available[i]);
   printf("Enter maximum claim table:");
   for(int i=0;i<np;i++){
     for(int j=0;j<nr;j++) scanf("%d",&max[i][j]);
@@ -20,10 +20,10 @@ int main(){
     finish[i]=0;//set finish to 0 
     for(int j=0;j<nr;j++){
         need[i][j]=max[i][j]-allocation[i][j];//compute need matrix
-        possess[j]+=allocation[i][j];//compute total resource possessed
+        possess[j]+=allocation[i][j];//compute total resource possessed in each type
       }
   }
-  for(int i=0;i<np;i++) available[i]=resources[i]-possess[i];//compute available resources
+  for(int i=0;i<np;i++) work[i]=available[i]-possess[i];//compute work available
   printf("\nAllocation table:\n");//display given data
   for(int i=0;i<np;i++){
     for(int j=0;j<nr;j++){
@@ -43,7 +43,7 @@ int main(){
       if (finish[i] == 0) {
         int flag = 0;
         for (int j = 0; j < nr; j++) {
-          if (need[i][j] > available[j]){
+          if (need[i][j] > work[j]){
             flag = 1;
             break;
           }
@@ -51,11 +51,10 @@ int main(){
         if (flag==0) {
           sequence[index++] = i;
           printf("\nProcess %d is executing\n",i);
-          for (int y = 0; y < nr; y++) available[y] += allocation[i][y];
+          for (int y = 0; y < nr; y++) work[y] += allocation[i][y];
           printf("Currently available resources\n");
-          for (int y = 0; y < nr; y++) printf("%d ",available[y]);
-          finish[i] = 1;
-          
+          for (int y = 0; y < nr; y++) printf("%d ",work[y]);
+          finish[i] = 1;          
         }
       }
     }
