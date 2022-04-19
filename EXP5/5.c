@@ -34,7 +34,7 @@ int main(){
   printf("\nMax table:\n");
   for(int i=0;i<np;i++){
     for(int j=0;j<nr;j++){
-      printf("%d  ",allocation[i][j]);
+      printf("%d  ",max[i][j]);
     }
     printf("\n");
   }
