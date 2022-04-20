@@ -23,7 +23,7 @@ int main(){
         possess[j]+=allocation[i][j];//compute total resource possessed in each type
       }
   }
-  for(int i=0;i<np;i++) work[i]=available[i]-possess[i];//compute work available
+  for(int i=0;i<nr;i++) work[i]=available[i]-possess[i];//compute work available
   printf("\nAllocation table:\n");//display given data
   for(int i=0;i<np;i++){
     for(int j=0;j<nr;j++){
